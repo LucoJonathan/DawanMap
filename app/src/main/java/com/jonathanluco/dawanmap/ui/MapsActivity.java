@@ -156,7 +156,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     LatLng targetPos = new LatLng(selected.getLatitude(), selected.getLongitude());
 
                     // Zoom et centrage sur la position
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(targetPos, 14f));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(targetPos, 10f));
 
                     // Ouverture de la boîte d'adresse
                     Marker marker = markerMap.get(selected.getId());
