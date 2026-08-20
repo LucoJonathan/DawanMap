@@ -1,4 +1,4 @@
-package com.jonathanluco.dawanmap.data;
+package com.jonathanluco.dawanmap.data.db.entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

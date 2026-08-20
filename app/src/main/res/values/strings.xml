@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">DawanMap</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="liste_des_centres">Liste des centres</string>
 </resources>

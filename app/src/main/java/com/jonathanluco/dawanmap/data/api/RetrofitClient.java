@@ -1,4 +1,4 @@
-package com.jonathanluco.dawanmap.data;
+package com.jonathanluco.dawanmap.data.api;
 
 
 import retrofit2.Retrofit;
