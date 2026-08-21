@@ -14,6 +14,9 @@ import com.jonathanluco.dawanmap.R;
 
 import java.util.Locale;
 
+/**
+ * Fragment d'affichage des détails d'un marker sélectionné.
+ */
 public class MarkerInfoFragment extends Fragment {
 
     private static final String ARG_TITLE = "arg_title";
@@ -21,6 +24,15 @@ public class MarkerInfoFragment extends Fragment {
     private static final String ARG_LATITUDE = "arg_latitude";
     private static final String ARG_LONGITUDE = "arg_longitude";
 
+    /**
+     * Crée une instance du fragment avec ses données d'affichage.
+     *
+     * @param title nom du centre.
+     * @param address adresse du centre.
+     * @param latitude latitude du centre.
+     * @param longitude longitude du centre.
+     * @return fragment initialisé.
+     */
     public static MarkerInfoFragment newInstance(String title, String address, double latitude, double longitude) {
         MarkerInfoFragment fragment = new MarkerInfoFragment();
         Bundle args = new Bundle();
@@ -32,6 +44,14 @@ public class MarkerInfoFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * Inflate la vue du fragment.
+     *
+     * @param inflater inflater Android.
+     * @param container conteneur parent.
+     * @param savedInstanceState état sauvegardé.
+     * @return vue racine du fragment.
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -39,6 +59,12 @@ public class MarkerInfoFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_marker_info, container, false);
     }
 
+    /**
+     * Lie les données reçues aux vues du panneau d'information.
+     *
+     * @param view vue racine du fragment.
+     * @param savedInstanceState état sauvegardé.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

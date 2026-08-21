@@ -4,8 +4,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests unitaires du modèle {@link Location}.
+ */
 public class LocationTest {
 
+    /**
+     * Vérifie que les setters/getters conservent les valeurs.
+     */
     @Test
     public void settersAndGetters_shouldKeepValues() {
         Location location = new Location();

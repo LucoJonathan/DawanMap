@@ -32,6 +32,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Écran principal affichant la carte et les centres Dawan.
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -39,6 +42,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private List<LocationEntity> currentLocations = new ArrayList<>();
     private final Map<Integer, Marker> markerMap = new HashMap<>();
 
+    /**
+     * Initialise la carte et les actions utilisateur.
+     *
+     * @param savedInstanceState état Android sauvegardé.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +65,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnList.setOnClickListener(v -> showLocationsListDialog());
     }
 
+    /**
+     * Configure les callbacks GoogleMap et déclenche le chargement.
+     *
+     * @param googleMap instance de carte prête.
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -71,6 +84,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         loadLocations();
     }
 
+    /**
+     * Charge les centres via API puis synchronise la base locale.
+     */
     private void loadLocations() {
         RetrofitClient.getInstance().getLocations().enqueue(new Callback<List<Location>>() {
             @Override
@@ -101,6 +117,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+    /**
+     * Charge les centres depuis SQLite en mode local.
+     */
     private void loadFromSQLite() {
         new Thread(() -> {
             List<LocationEntity> entities = locationDao.getAllLocations();
@@ -108,6 +127,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }).start();
     }
 
+    /**
+     * Affiche les markers sur la carte et recentre la caméra.
+     *
+     * @param locations centres à afficher.
+     */
     private void displayMarkers(List<LocationEntity> locations) {
         mMap.clear();
         markerMap.clear();
@@ -137,6 +161,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    /**
+     * Ouvre la liste de centres, puis centre la carte sur la sélection.
+     */
     private void showLocationsListDialog() {
         if (currentLocations.isEmpty()) {
             Toast.makeText(this, "Aucune localisation disponible", Toast.LENGTH_SHORT).show();
@@ -168,6 +195,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .show();
     }
 
+    /**
+     * Affiche le fragment d'information correspondant au marker.
+     *
+     * @param marker marker sélectionné.
+     */
     private void showMarkerInfoFragment(Marker marker) {
         View container = findViewById(R.id.marker_info_container);
         container.setVisibility(View.VISIBLE);
@@ -186,6 +218,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .commit();
     }
 
+    /**
+     * Masque le fragment d'information actif.
+     */
     private void hideMarkerInfoFragment() {
         View container = findViewById(R.id.marker_info_container);
         container.setVisibility(View.GONE);

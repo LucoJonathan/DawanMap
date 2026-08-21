@@ -20,6 +20,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.containsString;
 
+/**
+ * Tests UI Espresso de l'écran carte.
+ */
 @RunWith(AndroidJUnit4.class)
 public class MapsActivityEspressoTest {
 
@@ -27,12 +30,20 @@ public class MapsActivityEspressoTest {
     public ActivityScenarioRule<MapsActivity> activityRule =
             new ActivityScenarioRule<>(MapsActivity.class);
 
+    /**
+     * Vérifie l'affichage initial de la carte et du bouton liste.
+     */
     @Test
     public void mapAndListButton_shouldBeDisplayed() {
         onView(withId(R.id.map)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_list)).check(matches(isDisplayed()));
     }
 
+    /**
+     * Vérifie qu'une sélection depuis la liste affiche le panneau info.
+     *
+     * @throws InterruptedException interruption du thread de test.
+     */
     @Test
     public void listSelection_shouldShowMarkerInfoPanel() throws InterruptedException {
         Thread.sleep(2500);

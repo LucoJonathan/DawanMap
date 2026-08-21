@@ -8,8 +8,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Tests unitaires des utilitaires de coordonnées.
+ */
 public class CoordinateFormatterTest {
 
+    /**
+     * Vérifie le rejet des coordonnées invalides.
+     */
     @Test
     public void hasValidCoordinates_shouldRejectNaNAndInfinity() {
         assertFalse(CoordinateFormatter.hasValidCoordinates(Double.NaN, 2.0));
@@ -19,6 +25,9 @@ public class CoordinateFormatterTest {
         assertTrue(CoordinateFormatter.hasValidCoordinates(47.218371, -1.553621));
     }
 
+    /**
+     * Vérifie le format à 6 décimales.
+     */
     @Test
     public void formatCoordinate_shouldKeepSixDecimals() {
         String lat = CoordinateFormatter.formatCoordinate(47.2183712, Locale.US);

@@ -4,8 +4,14 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests unitaires de l'entité {@link LocationEntity}.
+ */
 public class LocationEntityTest {
 
+    /**
+     * Vérifie que le constructeur renseigne toutes les propriétés.
+     */
     @Test
     public void constructor_shouldExposeAllValues() {
         LocationEntity entity = new LocationEntity(
