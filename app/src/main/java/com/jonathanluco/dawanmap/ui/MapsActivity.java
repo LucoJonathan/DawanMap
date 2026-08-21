@@ -178,7 +178,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         R.id.marker_info_container,
                         MarkerInfoFragment.newInstance(
                                 marker.getTitle(),
-                                marker.getSnippet()
+                                marker.getSnippet(),
+                                marker.getPosition().latitude,
+                                marker.getPosition().longitude
                         )
                 )
                 .commit();

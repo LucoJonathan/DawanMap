@@ -2,4 +2,6 @@
     <string name="app_name">DawanMap</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="liste_des_centres">Liste des centres</string>
+    <string name="coordonnees_format">Latitude : %1$s | Longitude : %2$s</string>
+    <string name="coordonnees_indisponibles">Coordonnées indisponibles</string>
 </resources>
