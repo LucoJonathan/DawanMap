@@ -57,14 +57,14 @@ public class MarkerInfoFragment extends Fragment {
             titleView.setText(title);
             addressView.setText(address);
 
-            if (Double.isNaN(latitude) || Double.isNaN(longitude)) {
+            if (!CoordinateFormatter.hasValidCoordinates(latitude, longitude)) {
                 coordinatesView.setText(getString(R.string.coordonnees_indisponibles));
             } else {
                 coordinatesView.setText(
                         getString(
                                 R.string.coordonnees_format,
-                                String.format(Locale.getDefault(), "%.6f", latitude),
-                                String.format(Locale.getDefault(), "%.6f", longitude)
+                                CoordinateFormatter.formatCoordinate(latitude, Locale.getDefault()),
+                                CoordinateFormatter.formatCoordinate(longitude, Locale.getDefault())
                         )
                 );
             }
