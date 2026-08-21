@@ -2,9 +2,11 @@ package com.jonathanluco.dawanmap.ui;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -60,13 +62,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         mMap.setOnMarkerClickListener(marker -> {
-            new AlertDialog.Builder(MapsActivity.this)
-                    .setTitle(marker.getTitle())
-                    .setMessage("Adresse :\n" + marker.getSnippet())
-                    .setPositiveButton("Fermer", null)
-                    .show();
+            showMarkerInfoFragment(marker);
             return true;
         });
+
+        mMap.setOnMapClickListener(latLng -> hideMarkerInfoFragment());
 
         loadLocations();
     }
@@ -158,13 +158,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     // Zoom et centrage sur la position
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(targetPos, 10f));
 
-                    // Ouverture de la boîte d'adresse
+                    // Affiche le panneau d'info du centre
                     Marker marker = markerMap.get(selected.getId());
                     if (marker != null) {
-                        marker.showInfoWindow();
+                        showMarkerInfoFragment(marker);
                     }
                 })
                 .setNegativeButton("Annuler", null)
                 .show();
+    }
+
+    private void showMarkerInfoFragment(Marker marker) {
+        View container = findViewById(R.id.marker_info_container);
+        container.setVisibility(View.VISIBLE);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(
+                        R.id.marker_info_container,
+                        MarkerInfoFragment.newInstance(
+                                marker.getTitle(),
+                                marker.getSnippet()
+                        )
+                )
+                .commit();
+    }
+
+    private void hideMarkerInfoFragment() {
+        View container = findViewById(R.id.marker_info_container);
+        container.setVisibility(View.GONE);
+
+        Fragment markerInfoFragment = getSupportFragmentManager().findFragmentById(R.id.marker_info_container);
+        if (markerInfoFragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .remove(markerInfoFragment)
+                    .commit();
+        }
     }
 }
